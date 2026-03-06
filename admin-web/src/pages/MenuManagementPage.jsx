@@ -59,8 +59,11 @@ export default function MenuManagementPage() {
     const oldIdx = menus.findIndex((m) => m.id === activeId);
     const newIdx = menus.findIndex((m) => m.id === overId);
     if (oldIdx < 0 || newIdx < 0) return;
+    const reordered = [...menus];
+    const [moved] = reordered.splice(oldIdx, 1);
+    reordered.splice(newIdx, 0, moved);
+    setMenus(reordered);
     await menuService.updateMenu(activeId, { sort_order: newIdx });
-    load();
   };
 
   return (
