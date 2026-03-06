@@ -447,3 +447,51 @@ AI-DLC 워크플로우를 시작해봅시다."
 **Context**: Unit 0 Build and Test 단계 완료, 사용자 승인 대기
 
 ---
+
+## Unit 1: Customer - Functional Design
+**Timestamp**: 2026-03-06T15:26:08+09:00
+**User Input**: "git 소스 pull 햇어. 지금부터 unit 1 을 진행할 거야. unit-1-customer-functional-design-plan.md 파일부터 참고해서 진행해"
+**AI Response**: Plan 파일의 질문 확인 요청
+**Context**: Unit 1 Functional Design 시작
+
+---
+
+## Unit 1: Customer - Functional Design Q&A
+**Timestamp**: 2026-03-06T15:26:08+09:00
+**User Input**: Plan 파일에 직접 답변 완료 (Q1:B, Q2:B, Q3:C, Q4:A, Q5:3열 그리드)
+**AI Response**: 답변 확인 후 Functional Design 문서 3개 생성 (business-logic-model.md, business-rules.md, frontend-components.md)
+**Context**: Unit 1 Functional Design - Step 1~4 실행 완료
+
+---
+
+## Unit 1: Customer - NFR Requirements
+**Timestamp**: 2026-03-06T15:30:09+09:00
+**User Input**: "next"
+**AI Response**: Functional Design 승인 확인. Unit 0 NFR 상속 기반으로 Customer 유닛 NFR 문서 2개 생성 (nfr-requirements.md, tech-stack-decisions.md)
+**Context**: Unit 1 NFR Requirements 완료
+
+---
+
+## Unit 1: Customer - NFR Design
+**Timestamp**: 2026-03-06T15:31:26+09:00
+**User Input**: "next"
+**AI Response**: NFR Requirements 승인 확인. Unit 0 패턴 상속 기반으로 Customer 유닛 NFR Design 문서 2개 생성 (nfr-design-patterns.md, logical-components.md)
+**Context**: Unit 1 NFR Design 완료
+
+---
+
+## Unit 1: Customer - Infrastructure Design
+**Timestamp**: 2026-03-06T15:32:48+09:00
+**User Input**: "next"
+**AI Response**: NFR Design 승인 확인. Unit 0 인프라 확장으로 Customer 유닛 Infrastructure Design 문서 2개 생성 (infrastructure-design.md, deployment-architecture.md)
+**Context**: Unit 1 Infrastructure Design 완료
+
+---
+
+## Unit 1: Customer - Code Generation
+**Timestamp**: 2026-03-06T15:35:22+09:00
+**User Input**: "B" (Standard 방식 선택), "진행해." (Plan 승인)
+**AI Response**: 18 Step Code Generation Plan 실행 완료. Backend 7 steps + Frontend 9 steps + Infra 1 step + Doc 1 step.
+**Context**: Unit 1 Code Generation 완료 - 13 stories 전체 커버
+
+---
