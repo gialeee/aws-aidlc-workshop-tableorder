@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -20,6 +20,6 @@ class SessionRepository:
         await self.db.execute(
             update(TableSession)
             .where(TableSession.id == session_id)
-            .values(is_active=False, ended_at=datetime.utcnow())
+            .values(is_active=False, ended_at=datetime.now(timezone.utc))
         )
         await self.db.flush()

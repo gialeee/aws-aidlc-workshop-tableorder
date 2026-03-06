@@ -17,7 +17,9 @@ async def get_orders(admin: dict = Depends(get_current_admin), db: AsyncSession 
 
 
 @router.get("/stream")
-async def order_stream(admin: dict = Depends(get_current_admin), db: AsyncSession = Depends(get_db)):
+async def order_stream(token: str, db: AsyncSession = Depends(get_db)):
+    from admin_api.app.services.auth_service import AuthService
+    admin = AuthService.verify_token(token)
     service = OrderService(db)
     return EventSourceResponse(service.stream_orders(admin["store_id"]))
 

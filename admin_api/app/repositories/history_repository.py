@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -20,7 +20,7 @@ class HistoryRepository:
     ) -> list[OrderHistory]:
         query = select(OrderHistory).where(OrderHistory.table_id == table_id)
 
-        one_year_ago = datetime.utcnow() - timedelta(days=365)
+        one_year_ago = datetime.now(timezone.utc) - timedelta(days=365)
         query = query.where(OrderHistory.archived_at >= one_year_ago)
 
         if date_from:
