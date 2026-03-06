@@ -28,6 +28,7 @@ class OrderResponse(BaseModel):
     status: str
     total_amount: int
     created_at: datetime
+    session_started_at: datetime | None = None
     items: list[OrderItemResponse] = []
 
     model_config = {"from_attributes": True}

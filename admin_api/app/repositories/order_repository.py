@@ -14,7 +14,7 @@ class OrderRepository:
     async def find_by_store(self, store_id: int) -> list[Order]:
         result = await self.db.execute(
             select(Order)
-            .options(selectinload(Order.items))
+            .options(selectinload(Order.items), selectinload(Order.session))
             .where(Order.store_id == store_id)
             .order_by(Order.created_at.desc())
         )

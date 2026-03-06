@@ -9,6 +9,7 @@ class SessionResponse(BaseModel):
     store_id: int
     table_id: int
     table_number: int
+    started_at: datetime
 
     model_config = {"from_attributes": True}
 

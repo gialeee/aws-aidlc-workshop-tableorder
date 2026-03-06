@@ -5,12 +5,11 @@ import TableGrid from '../components/dashboard/TableGrid';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 
 export default function DashboardPage() {
-  const { orders, fetchOrders, subscribeToOrders, unsubscribe } = useOrderStore();
+  const { orders, startPolling, stopPolling } = useOrderStore();
 
   useEffect(() => {
-    fetchOrders();
-    subscribeToOrders();
-    return () => unsubscribe();
+    startPolling();
+    return () => stopPolling();
   }, []);
 
   return (
