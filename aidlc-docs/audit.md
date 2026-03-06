@@ -447,3 +447,96 @@ AI-DLC 워크플로우를 시작해봅시다."
 **Context**: Unit 0 Build and Test 단계 완료, 사용자 승인 대기
 
 ---
+
+## Unit 2 (Admin) - Functional Design Start
+**Timestamp**: 2026-03-06T14:51:27Z
+**User Input**: "응 unit 2 시작하자"
+**AI Response**: Unit 2 Functional Design 시작, 플랜 및 질문 생성
+**Context**: CONSTRUCTION Phase - Unit 2 Functional Design Plan 생성
+
+---
+
+## Unit 2 (Admin) - Functional Design Answers
+**Timestamp**: 2026-03-06T15:14:13Z
+**User Input**: "c, C, A, B, A, A, A"
+**AI Response**: 답변 반영, Functional Design 문서 생성 시작
+**Context**: Q1:C(3초), Q2:C(5개), Q3:A(드래그앤드롭), Q4:B(무한스크롤), Q5:A(SSE삭제이벤트), Q6:A(별도페이지), Q7:A(카테고리CRUD)
+
+---
+
+## Unit 2 (Admin) - Functional Design Complete
+**Timestamp**: 2026-03-06T15:14:13Z
+**AI Action**: Functional Design 문서 3개 생성 완료
+**Files**: business-logic-model.md, business-rules.md, frontend-components.md
+**Context**: Unit 2 Functional Design 완료, 승인 대기
+
+---
+
+## Unit 1 (Customer) - Functional Design Plan Created
+**Timestamp**: 2026-03-06T15:14:13Z
+**User Input**: "done. 그리고 unit1에 대한 기능 디자인 질문도 만들어줘"
+**AI Action**: Unit 1 Functional Design Plan 및 질문 5개 생성
+**Context**: 다른 참여자가 Unit 1 작업 시 사용할 질문
+
+---
+
+## Unit 2 (Admin) - Functional Design Approval
+**Timestamp**: 2026-03-06T15:17:57Z
+**User Input**: "done"
+**AI Response**: Functional Design 승인 확인, NFR Requirements로 진행
+**Context**: Unit 2 Functional Design 승인 완료
+
+---
+
+## Unit 2 (Admin) - NFR Requirements Answers
+**Timestamp**: 2026-03-06T15:22:34Z
+**User Input**: "A, A, A, 드래그앤드롭은 너가 추천해서 정해줘"
+**AI Response**: Q1:A(1~3명), Q2:A(5개이하), Q3:A(Tailwind), Q4:A(@dnd-kit 추천) - NFR 문서 생성
+**Context**: Unit 2 NFR Requirements 완료
+
+---
+
+## Unit 2 (Admin) - NFR Requirements Approval
+**Timestamp**: 2026-03-06T15:24:03Z
+**User Input**: "continue"
+**AI Response**: NFR Requirements 승인, NFR Design 진행
+**Context**: Unit 2 NFR Requirements 승인 완료
+
+---
+
+## Unit 2 (Admin) - NFR Design Complete
+**Timestamp**: 2026-03-06T15:24:03Z
+**AI Action**: NFR Design 문서 생성 (nfr-design-patterns.md, logical-components.md)
+**Context**: 질문 불필요 (Unit 0 패턴 상속 + 명확한 결정사항), 바로 문서 생성
+
+---
+
+## Unit 2 (Admin) - NFR Design Approval
+**Timestamp**: 2026-03-06T15:29:21Z
+**User Input**: "approve"
+**AI Response**: NFR Design 승인, Infrastructure Design 진행
+**Context**: Optimistic UI 논의 후 현재 설계 유지 결정 (A)
+
+---
+
+## Unit 2 (Admin) - Infrastructure Design Complete
+**Timestamp**: 2026-03-06T15:29:21Z
+**AI Action**: Infrastructure Design 문서 생성 (infrastructure-design.md, deployment-architecture.md)
+**Context**: Unit 0 인프라 확장, Admin API :8001, Admin Web :3001
+
+---
+
+## Unit 2 (Admin) - Infrastructure Design Approval
+**Timestamp**: 2026-03-06T15:32:15Z
+**User Input**: "continue"
+**AI Response**: Infrastructure Design 승인, Code Generation 진행
+**Context**: Unit 2 Infrastructure Design 승인 완료
+
+---
+
+## Unit 2 (Admin) - Code Generation Plan
+**Timestamp**: 2026-03-06T15:32:15Z
+**AI Action**: Code Generation Plan 생성 (19 steps), Standard approach
+**Context**: Admin API 8 steps + Admin Web 10 steps + Documentation 1 step
+
+---
