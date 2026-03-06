@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import String, Integer, DateTime, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
@@ -17,7 +17,7 @@ class Order(Base):
     order_number: Mapped[str] = mapped_column(String(20), unique=True, nullable=False)
     status: Mapped[str] = mapped_column(String(20), default="PENDING", nullable=False)
     total_amount: Mapped[int] = mapped_column(Integer, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
 
     session = relationship("TableSession", back_populates="orders")
     items = relationship("OrderItem", back_populates="order", cascade="all, delete-orphan")
