@@ -548,3 +548,60 @@ AI-DLC 워크플로우를 시작해봅시다."
 **Context**: 19 steps 모두 완료, 사용자 승인 대기
 
 ---
+
+## Unit 2 Code Generation Approval
+**Timestamp**: 2026-03-06T15:50:05+09:00
+**User Input**: "approve, next step"
+**AI Response**: Unit 2 코드 생성 승인 확인. Build & Test 단계 진행.
+**Context**: Unit 2 (Admin) Code Generation 승인 → Build and Test 단계 시작
+
+---
+
+## Build and Test - Unit 2
+**Timestamp**: 2026-03-06T15:50:05+09:00
+**AI Response**: Build & Test 문서 생성 완료 (Unit 0 + Unit 2 통합)
+**Files Generated**:
+- build-instructions.md (updated: shared + admin-api + admin-web)
+- unit-test-instructions.md (updated: shared tests + admin API smoke tests + admin web lint/build)
+- integration-test-instructions.md (updated: 5 scenarios for Unit 0 + Unit 2)
+- build-and-test-summary.md (updated: overall status)
+**Context**: Build and Test stage for Unit 2 (Admin)
+
+---
+
+## Bug Fix - Datetime Timezone Issue
+**Timestamp**: 2026-03-06T16:27:17+09:00
+**User Input**: "aidlc 작업하던 걸 이어서 하고싶어. 브론트/백 연동해서 테스트 중인데 로그인까진 했지만 백엔드 401 에러나. Traceback (most recent call last): File \"asyncpg/protocol/prepared_stmt.pyx\", line 175, in asyncpg.protocol.protocol.PreparedStatementState._encode_bind_msg File \"asyncpg/protocol/codecs/base.pyx\", line 251, in asyncpg.protocol.protocol.Codec.encode File \"asyncpg/protocol/codecs/base.pyx\", line 153, in asyncpg.protocol.protocol.Codec.encode_scalar File \"asyncpg/pgproto/codecs/datetime.pyx\", line 152, in asyncpg.pgproto.pgproto.timestamp_encode TypeError: can't subtract offset-naive and offset-aware datetimes"
+**AI Response**: Datetime timezone 불일치 문제 해결
+**Context**: 프론트/백 연동 테스트 중 401 에러 및 datetime 에러 발생
+
+**Root Cause**:
+- 모델에서 `datetime.utcnow` (timezone-naive) 사용
+- 서비스/레포지토리에서 `datetime.now(timezone.utc)` (timezone-aware) 사용
+- asyncpg가 timezone-aware와 naive datetime 비교 시 에러 발생
+
+**Fixed Files**:
+1. Models (timezone-aware로 변경):
+   - shared/models/order.py
+   - shared/models/menu.py
+   - shared/models/table_session.py
+   - shared/models/table.py
+   - shared/models/admin.py
+   - shared/models/store.py
+   - shared/models/order_history.py
+
+2. Repositories (timezone-aware로 변경):
+   - admin_api/app/repositories/history_repository.py
+   - admin_api/app/repositories/session_repository.py
+
+**Changes**:
+- `DateTime` → `DateTime(timezone=True)`
+- `default=datetime.utcnow` → `default=lambda: datetime.now(timezone.utc)`
+- `datetime.utcnow()` → `datetime.now(timezone.utc)`
+
+**Next Steps**:
+1. DB 재생성 필요 (reset-db.sh 스크립트 생성)
+2. 마이그레이션 재실행
+3. 테스트 데이터 재생성
+
+---
