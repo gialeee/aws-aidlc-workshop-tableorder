@@ -14,15 +14,17 @@ export default function CategoryForm({ category, onSubmit, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 items-end">
+    <form onSubmit={handleSubmit} className="flex flex-wrap gap-2 items-end">
       <input value={name} onChange={(e) => setName(e.target.value)} placeholder="카테고리명"
-        className="border rounded px-2 py-1 text-sm" data-testid="category-name-input" required />
+        className="border rounded px-2 py-1 text-sm flex-1 min-w-0" data-testid="category-name-input" required />
       <input type="number" value={sortOrder} onChange={(e) => setSortOrder(Number(e.target.value))}
-        className="border rounded px-2 py-1 text-sm w-16" data-testid="category-sort-input" />
-      <button type="submit" className="px-3 py-1 bg-blue-600 text-white text-sm rounded" data-testid="category-submit">
-        {category ? '수정' : '추가'}
-      </button>
-      {onCancel && <button type="button" onClick={onCancel} className="px-3 py-1 border text-sm rounded">취소</button>}
+        className="border rounded px-2 py-1 text-sm w-12" data-testid="category-sort-input" />
+      <div className="flex gap-1">
+        <button type="submit" className="px-3 py-1 bg-blue-600 text-white text-sm rounded" data-testid="category-submit">
+          {category ? '수정' : '추가'}
+        </button>
+        {onCancel && <button type="button" onClick={onCancel} className="px-3 py-1 border text-sm rounded">취소</button>}
+      </div>
     </form>
   );
 }
