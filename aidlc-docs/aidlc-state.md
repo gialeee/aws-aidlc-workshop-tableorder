@@ -32,18 +32,37 @@
 - [x] Units Generation (COMPLETED - 2026-03-06T13:27:50+09:00)
 
 ### CONSTRUCTION PHASE
-- [ ] Functional Design (PENDING - EXECUTE, per-unit)
-- [ ] NFR Requirements (PENDING - EXECUTE, per-unit)
-- [ ] NFR Design (PENDING - EXECUTE, per-unit)
-- [ ] Infrastructure Design (PENDING - EXECUTE, per-unit)
-- [ ] Code Generation (PENDING - EXECUTE, per-unit)
-- [ ] Build and Test (PENDING - EXECUTE)
+
+#### Unit 0: Shared
+- [x] Functional Design (COMPLETED - 2026-03-06T13:35:00+09:00)
+- [x] NFR Requirements (COMPLETED - 2026-03-06T13:45:00+09:00)
+- [x] NFR Design (COMPLETED - 2026-03-06T13:55:00+09:00)
+- [x] Infrastructure Design (COMPLETED - 2026-03-06T14:05:00+09:00)
+- [x] Code Generation (COMPLETED - 2026-03-06T14:18:41+09:00)
+
+#### Unit 1: Customer
+- [ ] Functional Design (PENDING)
+- [ ] NFR Requirements (PENDING)
+- [ ] NFR Design (PENDING)
+- [ ] Infrastructure Design (PENDING)
+- [ ] Code Generation (PENDING)
+
+#### Unit 2: Admin
+- [ ] Functional Design (PENDING)
+- [ ] NFR Requirements (PENDING)
+- [ ] NFR Design (PENDING)
+- [ ] Infrastructure Design (PENDING)
+- [ ] Code Generation (PENDING)
+
+#### Build and Test
+- [x] Build and Test - Unit 0 (COMPLETED - 2026-03-06T14:40:18+09:00)
+- [ ] Build and Test - Final (PENDING - after all units)
 
 ### OPERATIONS PHASE
 - [ ] Operations (PLACEHOLDER)
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Unit 0 (Shared) - Functional Design
-- **Next Stage**: Functional Design for Unit 0
-- **Status**: Ready to proceed
+- **Current Stage**: Build and Test - Unit 0 완료
+- **Next Stage**: Unit 1 (Customer) - Functional Design
+- **Status**: Build/Test 지침 생성 완료, 사용자 실행 대기
