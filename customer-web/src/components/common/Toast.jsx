@@ -1,22 +1,16 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
+import { Snackbar, Alert } from '@mui/material';
 
-let toastId = 0;
 let listeners = [];
-const toasts = [];
+let queue = [];
 
-function notify(message, type = 'success') {
-  const id = ++toastId;
-  toasts.push({ id, message, type });
-  listeners.forEach((l) => l([...toasts]));
+export function showToast(message, type = 'success') {
+  queue.push({ message, type, key: Date.now() });
+  listeners.forEach((l) => l([...queue]));
   setTimeout(() => {
-    const idx = toasts.findIndex((t) => t.id === id);
-    if (idx !== -1) toasts.splice(idx, 1);
-    listeners.forEach((l) => l([...toasts]));
+    queue = queue.filter((t) => t.key !== queue[0]?.key);
+    listeners.forEach((l) => l([...queue]));
   }, 3000);
-}
-
-export function showToast(message, type) {
-  notify(message, type);
 }
 
 export default function Toast() {
@@ -27,18 +21,14 @@ export default function Toast() {
     return () => { listeners = listeners.filter((l) => l !== setItems); };
   }, []);
 
-  if (!items.length) return null;
+  const current = items[0];
+  if (!current) return null;
 
   return (
-    <div style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 9999, display: 'flex', flexDirection: 'column', gap: 8 }}>
-      {items.map((t) => (
-        <div key={t.id} data-testid="toast" style={{
-          padding: '12px 24px', borderRadius: 8, color: '#fff', fontSize: 14,
-          background: t.type === 'error' ? '#e74c3c' : '#2ecc71',
-        }}>
-          {t.message}
-        </div>
-      ))}
-    </div>
+    <Snackbar open anchorOrigin={{ vertical: 'top', horizontal: 'center' }} data-testid="toast">
+      <Alert severity={current.type === 'error' ? 'error' : 'success'} variant="filled" sx={{ minWidth: 280 }}>
+        {current.message}
+      </Alert>
+    </Snackbar>
   );
 }

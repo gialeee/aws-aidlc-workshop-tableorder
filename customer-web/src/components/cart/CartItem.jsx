@@ -1,24 +1,30 @@
+import { Box, Typography, IconButton, Stack } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 export default function CartItem({ item, onUpdateQuantity, onRemove }) {
   return (
-    <div data-testid={`cart-item-${item.menu_id}`} style={{
-      display: 'flex', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid #f0f0f0', gap: 12,
-    }}>
-      <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 14, fontWeight: 600 }}>{item.name}</div>
-        <div style={{ fontSize: 13, color: '#888' }}>{item.price.toLocaleString()}원</div>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <button data-testid={`cart-decrease-${item.menu_id}`} onClick={() => onUpdateQuantity(item.menu_id, item.quantity - 1)}
-          style={{ width: 32, height: 32, border: '1px solid #ddd', borderRadius: 6, background: '#fff', cursor: 'pointer', fontSize: 16 }}>−</button>
-        <span style={{ minWidth: 20, textAlign: 'center', fontSize: 14 }}>{item.quantity}</span>
-        <button data-testid={`cart-increase-${item.menu_id}`} onClick={() => onUpdateQuantity(item.menu_id, item.quantity + 1)}
-          style={{ width: 32, height: 32, border: '1px solid #ddd', borderRadius: 6, background: '#fff', cursor: 'pointer', fontSize: 16 }}>+</button>
-      </div>
-      <div style={{ minWidth: 70, textAlign: 'right', fontSize: 14, fontWeight: 600 }}>
+    <Box data-testid={`cart-item-${item.menu_id}`} sx={{ display: 'flex', alignItems: 'center', py: 1.5, borderBottom: '1px solid #f0f0f0', gap: 1.5 }}>
+      <Box flex={1}>
+        <Typography variant="body2" fontWeight={600}>{item.name}</Typography>
+        <Typography variant="caption" color="text.secondary">{item.price.toLocaleString()}원</Typography>
+      </Box>
+      <Stack direction="row" alignItems="center" spacing={0.5}>
+        <IconButton size="small" onClick={() => onUpdateQuantity(item.menu_id, item.quantity - 1)} data-testid={`cart-decrease-${item.menu_id}`}>
+          <RemoveIcon fontSize="small" />
+        </IconButton>
+        <Typography variant="body2" sx={{ minWidth: 24, textAlign: 'center' }}>{item.quantity}</Typography>
+        <IconButton size="small" onClick={() => onUpdateQuantity(item.menu_id, item.quantity + 1)} data-testid={`cart-increase-${item.menu_id}`}>
+          <AddIcon fontSize="small" />
+        </IconButton>
+      </Stack>
+      <Typography variant="body2" fontWeight={700} sx={{ minWidth: 65, textAlign: 'right' }}>
         {(item.price * item.quantity).toLocaleString()}원
-      </div>
-      <button data-testid={`cart-remove-${item.menu_id}`} onClick={() => onRemove(item.menu_id)}
-        style={{ background: 'none', border: 'none', color: '#e74c3c', cursor: 'pointer', fontSize: 18 }}>✕</button>
-    </div>
+      </Typography>
+      <IconButton size="small" color="error" onClick={() => onRemove(item.menu_id)} data-testid={`cart-remove-${item.menu_id}`}>
+        <DeleteIcon fontSize="small" />
+      </IconButton>
+    </Box>
   );
 }

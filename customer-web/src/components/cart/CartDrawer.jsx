@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Drawer, Box, Typography, IconButton, Button, Divider, Stack } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import useCartStore from '../../stores/cartStore';
 import { createOrder } from '../../services/orderService';
 import { showToast } from '../common/Toast';
 import CartItem from './CartItem';
-import CartSummary from './CartSummary';
 
 export default function CartDrawer({ isOpen, onClose }) {
   const { getItems, getTotalPrice, getTotalCount, updateQuantity, removeItem, clearCart } = useCartStore();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const items = getItems();
 
   const handleOrder = async () => {
-    const items = getItems();
     if (items.length === 0) return;
     setLoading(true);
     try {
@@ -29,28 +31,33 @@ export default function CartDrawer({ isOpen, onClose }) {
   };
 
   return (
-    <>
-      {isOpen && <div data-testid="cart-overlay" onClick={onClose} style={{
-        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 200,
-      }} />}
-      <div data-testid="cart-drawer" style={{
-        position: 'fixed', top: 0, right: 0, bottom: 0, width: 340, background: '#fff', zIndex: 201,
-        transform: isOpen ? 'translateX(0)' : 'translateX(100%)', transition: 'transform 0.3s ease',
-        display: 'flex', flexDirection: 'column', padding: '16px 20px', overflowY: 'auto',
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <h3 style={{ margin: 0 }}>🛒 장바구니</h3>
-          <button data-testid="cart-close" onClick={onClose} style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer' }}>✕</button>
-        </div>
-        <div style={{ flex: 1 }}>
-          {getItems().length === 0
-            ? <div style={{ textAlign: 'center', color: '#999', padding: 40 }}>장바구니가 비어있습니다</div>
-            : getItems().map((item) => (
-                <CartItem key={item.menu_id} item={item} onUpdateQuantity={updateQuantity} onRemove={removeItem} />
-              ))}
-        </div>
-        <CartSummary totalPrice={getTotalPrice()} totalCount={getTotalCount()} onOrder={handleOrder} onClear={clearCart} loading={loading} />
-      </div>
-    </>
+    <Drawer anchor="right" open={isOpen} onClose={onClose} data-testid="cart-drawer"
+      PaperProps={{ sx: { width: 360, display: 'flex', flexDirection: 'column' } }}>
+      <Box sx={{ p: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Typography variant="h6" fontWeight={700}>🛒 장바구니</Typography>
+        <IconButton onClick={onClose} data-testid="cart-close"><CloseIcon /></IconButton>
+      </Box>
+      <Divider />
+      <Box sx={{ flex: 1, overflowY: 'auto', p: 2 }}>
+        {items.length === 0
+          ? <Box textAlign="center" py={8}><Typography color="text.secondary">장바구니가 비어있습니다</Typography></Box>
+          : items.map((item) => <CartItem key={item.menu_id} item={item} onUpdateQuantity={updateQuantity} onRemove={removeItem} />)}
+      </Box>
+      <Divider />
+      <Box sx={{ p: 2 }}>
+        <Stack direction="row" justifyContent="space-between" mb={2}>
+          <Typography variant="h6" fontWeight={700}>총 {getTotalCount()}개</Typography>
+          <Typography variant="h6" fontWeight={700} color="primary">{getTotalPrice().toLocaleString()}원</Typography>
+        </Stack>
+        <Stack direction="row" spacing={1}>
+          <Button variant="outlined" startIcon={<DeleteOutlineIcon />} onClick={clearCart} data-testid="cart-clear"
+            sx={{ flex: 1, textTransform: 'none' }}>비우기</Button>
+          <Button variant="contained" onClick={handleOrder} disabled={items.length === 0 || loading} data-testid="cart-order"
+            sx={{ flex: 2, textTransform: 'none', fontWeight: 700, py: 1.2 }}>
+            {loading ? '주문 중...' : '주문하기'}
+          </Button>
+        </Stack>
+      </Box>
+    </Drawer>
   );
 }

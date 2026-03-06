@@ -1,19 +1,22 @@
+import { List, ListItemButton, ListItemText, Box } from '@mui/material';
+
 export default function CategorySidebar({ categories, selectedId, onSelect }) {
   return (
-    <aside data-testid="category-sidebar" style={{
-      width: 120, minHeight: '100%', background: '#fafafa', borderRight: '1px solid #eee',
-      overflowY: 'auto', flexShrink: 0,
+    <Box data-testid="category-sidebar" sx={{
+      width: 180, minHeight: '100%', bgcolor: '#fff', borderRight: '1px solid #eee', overflowY: 'auto', flexShrink: 0,
     }}>
-      {categories.map((cat) => (
-        <button key={cat.id} data-testid={`category-${cat.id}`} onClick={() => onSelect(cat.id)}
-          style={{
-            display: 'block', width: '100%', padding: '14px 8px', border: 'none', cursor: 'pointer',
-            background: selectedId === cat.id ? '#2ecc71' : 'transparent',
-            color: selectedId === cat.id ? '#fff' : '#333', fontSize: 14, textAlign: 'center',
-          }}>
-          {cat.name}
-        </button>
-      ))}
-    </aside>
+      <List disablePadding>
+        {categories.map((cat) => (
+          <ListItemButton key={cat.id} selected={selectedId === cat.id} onClick={() => onSelect(cat.id)}
+            data-testid={`category-${cat.id}`}
+            sx={{
+              py: 2,
+              '&.Mui-selected': { bgcolor: 'primary.main', color: '#fff', '&:hover': { bgcolor: 'primary.dark' } },
+            }}>
+            <ListItemText primary={cat.name} primaryTypographyProps={{ fontSize: 16, fontWeight: selectedId === cat.id ? 700 : 500, textAlign: 'center' }} />
+          </ListItemButton>
+        ))}
+      </List>
+    </Box>
   );
 }

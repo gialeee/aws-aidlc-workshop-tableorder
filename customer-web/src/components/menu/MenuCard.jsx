@@ -1,22 +1,30 @@
+import { Card, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+
 export default function MenuCard({ menu, onAdd }) {
   return (
-    <div data-testid={`menu-card-${menu.id}`} style={{
-      background: '#fff', borderRadius: 10, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
-      display: 'flex', flexDirection: 'column',
-    }}>
-      <div style={{ width: '100%', height: 120, background: '#f0f0f0', overflow: 'hidden' }}>
-        {menu.image_url
-          ? <img src={menu.image_url} alt={menu.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          : <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#ccc', fontSize: 32 }}>🍽️</div>}
-      </div>
-      <div style={{ padding: '8px 10px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{menu.name}</div>
-        <div style={{ fontSize: 14, color: '#2ecc71', fontWeight: 700, marginBottom: 8 }}>{menu.price.toLocaleString()}원</div>
-        <button data-testid={`menu-add-${menu.id}`} onClick={() => onAdd(menu)}
-          style={{ marginTop: 'auto', padding: '8px 0', background: '#2ecc71', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}>
+    <Card data-testid={`menu-card-${menu.id}`} sx={{
+      display: 'flex', flexDirection: 'column', transition: 'transform 0.2s',
+      '&:hover': { transform: 'translateY(-2px)' },
+    }} elevation={2}>
+      <CardMedia component="img" image={menu.image_url || 'https://via.placeholder.com/300x200?text=No+Image'}
+        alt={menu.name} sx={{ aspectRatio: '3/2', objectFit: 'cover' }} />
+      <CardContent sx={{ flex: 1, pb: 1 }}>
+        <Typography variant="body1" fontWeight={700}>{menu.name}</Typography>
+        {menu.description && (
+          <Typography variant="body2" color="text.secondary" sx={{
+            display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', mt: 0.5,
+          }}>{menu.description}</Typography>
+        )}
+        <Typography variant="subtitle1" color="primary" fontWeight={800} mt={1}>{menu.price.toLocaleString()}원</Typography>
+      </CardContent>
+      <Box px={2} pb={2}>
+        <Button variant="contained" fullWidth size="small" startIcon={<AddShoppingCartIcon />}
+          onClick={() => onAdd(menu)} data-testid={`menu-add-${menu.id}`}
+          sx={{ borderRadius: 2, textTransform: 'none', fontWeight: 600 }}>
           담기
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Card>
   );
 }
