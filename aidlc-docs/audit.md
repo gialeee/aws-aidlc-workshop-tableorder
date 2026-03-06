@@ -447,3 +447,161 @@ AI-DLC 워크플로우를 시작해봅시다."
 **Context**: Unit 0 Build and Test 단계 완료, 사용자 승인 대기
 
 ---
+
+## Unit 2 (Admin) - Functional Design Start
+**Timestamp**: 2026-03-06T14:51:27Z
+**User Input**: "응 unit 2 시작하자"
+**AI Response**: Unit 2 Functional Design 시작, 플랜 및 질문 생성
+**Context**: CONSTRUCTION Phase - Unit 2 Functional Design Plan 생성
+
+---
+
+## Unit 2 (Admin) - Functional Design Answers
+**Timestamp**: 2026-03-06T15:14:13Z
+**User Input**: "c, C, A, B, A, A, A"
+**AI Response**: 답변 반영, Functional Design 문서 생성 시작
+**Context**: Q1:C(3초), Q2:C(5개), Q3:A(드래그앤드롭), Q4:B(무한스크롤), Q5:A(SSE삭제이벤트), Q6:A(별도페이지), Q7:A(카테고리CRUD)
+
+---
+
+## Unit 2 (Admin) - Functional Design Complete
+**Timestamp**: 2026-03-06T15:14:13Z
+**AI Action**: Functional Design 문서 3개 생성 완료
+**Files**: business-logic-model.md, business-rules.md, frontend-components.md
+**Context**: Unit 2 Functional Design 완료, 승인 대기
+
+---
+
+## Unit 1 (Customer) - Functional Design Plan Created
+**Timestamp**: 2026-03-06T15:14:13Z
+**User Input**: "done. 그리고 unit1에 대한 기능 디자인 질문도 만들어줘"
+**AI Action**: Unit 1 Functional Design Plan 및 질문 5개 생성
+**Context**: 다른 참여자가 Unit 1 작업 시 사용할 질문
+
+---
+
+## Unit 2 (Admin) - Functional Design Approval
+**Timestamp**: 2026-03-06T15:17:57Z
+**User Input**: "done"
+**AI Response**: Functional Design 승인 확인, NFR Requirements로 진행
+**Context**: Unit 2 Functional Design 승인 완료
+
+---
+
+## Unit 2 (Admin) - NFR Requirements Answers
+**Timestamp**: 2026-03-06T15:22:34Z
+**User Input**: "A, A, A, 드래그앤드롭은 너가 추천해서 정해줘"
+**AI Response**: Q1:A(1~3명), Q2:A(5개이하), Q3:A(Tailwind), Q4:A(@dnd-kit 추천) - NFR 문서 생성
+**Context**: Unit 2 NFR Requirements 완료
+
+---
+
+## Unit 2 (Admin) - NFR Requirements Approval
+**Timestamp**: 2026-03-06T15:24:03Z
+**User Input**: "continue"
+**AI Response**: NFR Requirements 승인, NFR Design 진행
+**Context**: Unit 2 NFR Requirements 승인 완료
+
+---
+
+## Unit 2 (Admin) - NFR Design Complete
+**Timestamp**: 2026-03-06T15:24:03Z
+**AI Action**: NFR Design 문서 생성 (nfr-design-patterns.md, logical-components.md)
+**Context**: 질문 불필요 (Unit 0 패턴 상속 + 명확한 결정사항), 바로 문서 생성
+
+---
+
+## Unit 2 (Admin) - NFR Design Approval
+**Timestamp**: 2026-03-06T15:29:21Z
+**User Input**: "approve"
+**AI Response**: NFR Design 승인, Infrastructure Design 진행
+**Context**: Optimistic UI 논의 후 현재 설계 유지 결정 (A)
+
+---
+
+## Unit 2 (Admin) - Infrastructure Design Complete
+**Timestamp**: 2026-03-06T15:29:21Z
+**AI Action**: Infrastructure Design 문서 생성 (infrastructure-design.md, deployment-architecture.md)
+**Context**: Unit 0 인프라 확장, Admin API :8001, Admin Web :3001
+
+---
+
+## Unit 2 (Admin) - Infrastructure Design Approval
+**Timestamp**: 2026-03-06T15:32:15Z
+**User Input**: "continue"
+**AI Response**: Infrastructure Design 승인, Code Generation 진행
+**Context**: Unit 2 Infrastructure Design 승인 완료
+
+---
+
+## Unit 2 (Admin) - Code Generation Plan
+**Timestamp**: 2026-03-06T15:32:15Z
+**AI Action**: Code Generation Plan 생성 (19 steps), Standard approach
+**Context**: Admin API 8 steps + Admin Web 10 steps + Documentation 1 step
+
+---
+
+## Unit 2 (Admin) - Code Generation Complete
+**Timestamp**: 2026-03-06T15:33:20Z
+**AI Action**: Unit 2 전체 코드 생성 완료 (44 files)
+**Files**: Admin API 17 files, Admin Web 27 files
+**Context**: 19 steps 모두 완료, 사용자 승인 대기
+
+---
+
+## Unit 2 Code Generation Approval
+**Timestamp**: 2026-03-06T15:50:05+09:00
+**User Input**: "approve, next step"
+**AI Response**: Unit 2 코드 생성 승인 확인. Build & Test 단계 진행.
+**Context**: Unit 2 (Admin) Code Generation 승인 → Build and Test 단계 시작
+
+---
+
+## Build and Test - Unit 2
+**Timestamp**: 2026-03-06T15:50:05+09:00
+**AI Response**: Build & Test 문서 생성 완료 (Unit 0 + Unit 2 통합)
+**Files Generated**:
+- build-instructions.md (updated: shared + admin-api + admin-web)
+- unit-test-instructions.md (updated: shared tests + admin API smoke tests + admin web lint/build)
+- integration-test-instructions.md (updated: 5 scenarios for Unit 0 + Unit 2)
+- build-and-test-summary.md (updated: overall status)
+**Context**: Build and Test stage for Unit 2 (Admin)
+
+---
+
+## Bug Fix - Datetime Timezone Issue
+**Timestamp**: 2026-03-06T16:27:17+09:00
+**User Input**: "aidlc 작업하던 걸 이어서 하고싶어. 브론트/백 연동해서 테스트 중인데 로그인까진 했지만 백엔드 401 에러나. Traceback (most recent call last): File \"asyncpg/protocol/prepared_stmt.pyx\", line 175, in asyncpg.protocol.protocol.PreparedStatementState._encode_bind_msg File \"asyncpg/protocol/codecs/base.pyx\", line 251, in asyncpg.protocol.protocol.Codec.encode File \"asyncpg/protocol/codecs/base.pyx\", line 153, in asyncpg.protocol.protocol.Codec.encode_scalar File \"asyncpg/pgproto/codecs/datetime.pyx\", line 152, in asyncpg.pgproto.pgproto.timestamp_encode TypeError: can't subtract offset-naive and offset-aware datetimes"
+**AI Response**: Datetime timezone 불일치 문제 해결
+**Context**: 프론트/백 연동 테스트 중 401 에러 및 datetime 에러 발생
+
+**Root Cause**:
+- 모델에서 `datetime.utcnow` (timezone-naive) 사용
+- 서비스/레포지토리에서 `datetime.now(timezone.utc)` (timezone-aware) 사용
+- asyncpg가 timezone-aware와 naive datetime 비교 시 에러 발생
+
+**Fixed Files**:
+1. Models (timezone-aware로 변경):
+   - shared/models/order.py
+   - shared/models/menu.py
+   - shared/models/table_session.py
+   - shared/models/table.py
+   - shared/models/admin.py
+   - shared/models/store.py
+   - shared/models/order_history.py
+
+2. Repositories (timezone-aware로 변경):
+   - admin_api/app/repositories/history_repository.py
+   - admin_api/app/repositories/session_repository.py
+
+**Changes**:
+- `DateTime` → `DateTime(timezone=True)`
+- `default=datetime.utcnow` → `default=lambda: datetime.now(timezone.utc)`
+- `datetime.utcnow()` → `datetime.now(timezone.utc)`
+
+**Next Steps**:
+1. DB 재생성 필요 (reset-db.sh 스크립트 생성)
+2. 마이그레이션 재실행
+3. 테스트 데이터 재생성
+
+---

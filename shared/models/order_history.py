@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import String, Integer, DateTime, JSON
 from sqlalchemy.dialects.postgresql import UUID
@@ -19,5 +19,5 @@ class OrderHistory(Base):
     status: Mapped[str] = mapped_column(String(20), nullable=False)
     total_amount: Mapped[int] = mapped_column(Integer, nullable=False)
     items_json: Mapped[dict] = mapped_column(JSON, nullable=False)
-    ordered_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    archived_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
+    ordered_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    archived_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)

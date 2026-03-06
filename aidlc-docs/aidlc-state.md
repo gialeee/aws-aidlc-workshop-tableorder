@@ -48,21 +48,22 @@
 - [ ] Code Generation (PENDING)
 
 #### Unit 2: Admin
-- [ ] Functional Design (PENDING)
-- [ ] NFR Requirements (PENDING)
-- [ ] NFR Design (PENDING)
-- [ ] Infrastructure Design (PENDING)
-- [ ] Code Generation (PENDING)
+- [x] Functional Design (COMPLETED)
+- [x] NFR Requirements (COMPLETED)
+- [x] NFR Design (COMPLETED)
+- [x] Infrastructure Design (COMPLETED)
+- [x] Code Generation (COMPLETED - 2026-03-06T15:30:00+09:00, approved 2026-03-06T15:50:05+09:00)
 
 #### Build and Test
 - [x] Build and Test - Unit 0 (COMPLETED - 2026-03-06T14:40:18+09:00)
-- [ ] Build and Test - Final (PENDING - after all units)
+- [x] Build and Test - Unit 2 (COMPLETED - 2026-03-06T15:50:05+09:00)
+- [ ] Build and Test - Final (PENDING - after all units merged to main)
 
 ### OPERATIONS PHASE
 - [ ] Operations (PLACEHOLDER)
 
 ## Current Status
 - **Lifecycle Phase**: CONSTRUCTION
-- **Current Stage**: Build and Test - Unit 0 완료
-- **Next Stage**: Unit 1 (Customer) - Functional Design
-- **Status**: Build/Test 지침 생성 완료, 사용자 실행 대기
+- **Current Stage**: Build and Test - Unit 2 완료
+- **Next Stage**: Unit 1 (Customer) - 다른 참가자가 `feature/unit-1-customer`에서 진행
+- **Status**: Unit 0 + Unit 2 Build/Test 지침 생성 완료, 사용자 실행 대기
