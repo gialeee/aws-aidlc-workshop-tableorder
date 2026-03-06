@@ -41,11 +41,11 @@
 - [x] Code Generation (COMPLETED - 2026-03-06T14:18:41+09:00)
 
 #### Unit 1: Customer
-- [ ] Functional Design (PENDING)
-- [ ] NFR Requirements (PENDING)
-- [ ] NFR Design (PENDING)
-- [ ] Infrastructure Design (PENDING)
-- [ ] Code Generation (PENDING)
+- [x] Functional Design (COMPLETED - 2026-03-06T15:26:08+09:00)
+- [x] NFR Requirements (COMPLETED - 2026-03-06T15:30:09+09:00)
+- [x] NFR Design (COMPLETED - 2026-03-06T15:31:26+09:00)
+- [x] Infrastructure Design (COMPLETED - 2026-03-06T15:32:48+09:00)
+- [x] Code Generation (COMPLETED - 2026-03-06T15:35:22+09:00)
 
 #### Unit 2: Admin
 - [x] Functional Design (COMPLETED)

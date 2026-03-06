@@ -17,6 +17,31 @@ services:
     networks:
       - tableorder-network
 
+  customer-api:
+    build:
+      context: .
+      dockerfile: customer-api/Dockerfile
+    ports:
+      - "${CUSTOMER_API_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    networks:
+      - tableorder-network
+
+  customer-web:
+    build:
+      context: ./customer-web
+    ports:
+      - "${CUSTOMER_WEB_PORT:-3001}:80"
+    depends_on:
+      - customer-api
+    networks:
+      - tableorder-network
+
 volumes:
   postgres_data:
 
