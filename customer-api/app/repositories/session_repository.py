@@ -18,7 +18,7 @@ class SessionRepository:
 
     async def find_by_id(self, session_id: UUID) -> TableSession | None:
         result = await self.db.execute(
-            select(TableSession).where(TableSession.id == session_id, TableSession.is_active.is_(True))
+            select(TableSession).where(TableSession.id == session_id)
         )
         return result.scalar_one_or_none()
 

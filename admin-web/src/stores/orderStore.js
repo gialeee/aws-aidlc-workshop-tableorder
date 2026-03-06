@@ -1,36 +1,25 @@
 import { create } from 'zustand';
 import { orderService } from '../services/orderService';
-import { sseUrl } from '../utils/api';
 
 export const useOrderStore = create((set, get) => ({
   orders: [],
-  eventSource: null,
+  pollingId: null,
 
   fetchOrders: async () => {
     const orders = await orderService.getOrders();
     set({ orders });
   },
 
-  subscribeToOrders: () => {
-    const token = localStorage.getItem('token');
-    const es = new EventSource(sseUrl(`/api/admin/orders/stream?token=${token}`));
-    es.onmessage = (event) => {
-      const payload = JSON.parse(event.data);
-      if (payload.event === 'new_order') {
-        set((state) => ({ orders: [payload.data, ...state.orders] }));
-      }
-    };
-    es.onerror = () => {
-      es.close();
-      setTimeout(() => get().subscribeToOrders(), 3000);
-    };
-    set({ eventSource: es });
+  startPolling: () => {
+    get().fetchOrders();
+    const id = setInterval(() => get().fetchOrders(), 3000);
+    set({ pollingId: id });
   },
 
-  unsubscribe: () => {
-    const { eventSource } = get();
-    if (eventSource) eventSource.close();
-    set({ eventSource: null });
+  stopPolling: () => {
+    const { pollingId } = get();
+    if (pollingId) clearInterval(pollingId);
+    set({ pollingId: null });
   },
 
   updateOrderStatus: async (orderId, status) => {

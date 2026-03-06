@@ -36,4 +36,5 @@ class AuthService:
             "store_id": store.id,
             "table_id": table.id,
             "table_number": table.table_number,
+            "started_at": session.started_at,
         }
